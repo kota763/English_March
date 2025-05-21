@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8", lang="ja">
+    <title>HOME</title>
+    <link rel="stylesheet", type="text/css" href="./static/css/style-home.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<header>
+    <div class="header-left">Vocabulary道場</div>
+    <div class="site-info-wrapper">
+        <div class="site-info-trigger">このサイトの紹介</div>
+        <div class="site-info-popup">
+            <p>「Vocabulary道場」は、英語学習者がアウトプットを通して楽しく語彙力を鍛えるための無料Webアプリです。</p><p>「単語帳では覚えたのにテストでは出てこなかった」を解消しましょう✏️</p><p>「始める」を押すとAIにより問題が自動で生成されます。</p>
+        </div>
+    </div>
+    {% if current_user.is_authenticated %}
+    <div class="correct_counter">
+        <p>正解カウンター</p>
+        <p><span style="font-size: larger;">{{ correct_counter.correct_answers }}</span>問</p>
+    </div>
+    {% endif %}
+    <div class="header-right">
+        <img src="{{ url_for('static', filename='images/English-Logo.jpg') }}" alt="Logo" class="logo">
+    </div>
+</header>
+
+
+<h2>レベルを選んで学習スタート!</h2>
+<form action="/practice" method="get">
+    <select name="level">
+        <option value="A1">A1</option>
+        <option value="A2">A2</option>
+        <option value="B1">B1</option>
+        <option value="B2">B2</option>
+    </select>
+    <button type="submit" class="round-button">始める</button>
+</form>
+
+{% if current_user.is_authenticated %}
+<p>ようこそ、{{ current_user.username }} さん (ログアウトする時は<a href="/logout">こちら</a>)</p>
+<p>これまでに正解した問題数: <span style="font-size: larger; color: #02A08F; font-weight: 300;">{{ correct_counter.correct_answers }}</span> 問</p>
+<h3>📝 保存した単語(テスト問題でパッと出てこなかった単語を保存しよう!)</h3>
+<!--
+<ul>
+    {% for w in words %}
+        <li>{{ w.word }}<a href="https://www.deepl.com/ja/translator#en/ja/{{ w.word | urlencode }}" target="_blank" id="DeepL-word"> 🔍</a></li>
+    {% endfor %}
+</ul>
+-->
+<table>
+    <thead>
+      <tr>
+        <th class="col">▼</th>
+        <th class="col">保存した日</th>
+        <th class="col">レベル</th>
+        <th class="col">単語</th>
+        <th class="col">検索</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for w in words %}
+      <tr>
+        <td class="col">
+          <button class="popup-toggle-btn" onclick="showPopup({{ loop.index0 }})">▼</button>
+        </td>
+        <td class="col">{{ w.save_date }}</td>
+        <td class="col">{{ w.level }}</td>
+        <td class="txt">{{ w.word }}</td>
+        <td class="txt"> <a id="DeepL-word" href="https://www.deepl.com/ja/translator#en/ja/{{ w.word | urlencode }}" target="_blank">🔍</a></td>
+      </tr>
+      <tr id="popup-{{ loop.index0 }}" class="popup-row" style="display: none; background-color: #fef9e7;">
+        <!--
+        <td colspan="4" class="txt" style="padding: 1em 1.5em; font-style: italic;">
+          {{ w.question_text }}
+        </td>
+    -->
+        <td colspan="4" class="txt" style="padding: 1em 1.5em; font-style: normal;">
+            {{ w.question_text | highlight_word(w.word) | safe }}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
+
+<p>「これ何だっけ🤔」という単語は🔍のマークを押して意味を確認しよう!</p>
+
+{% else %}
+
+<p><b><a href="/login">ログイン</a></b> または <b><a href="/register">登録</a></b>してください</p>
+<p>ログインして学習すると、学習した単語を保存できるようになります(効率up!!)</p>
+{% endif %}
+
+
+<h3>各区分のレベル感</h3>
+<table>
+    <thead>
+        <tr>
+            <td class="col">区分</td>
+            <th scope="col">単語のレベル</th>
+            <th scope="col">TOEIC目標スコア</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>A1</th>
+            <td data-label="学年" class="txt">中1</td>
+            <td data-label="スコア" class="score">0~225</td>
+        </tr>
+        <tr>
+            <th>A2</th>
+            <td data-label="学年" class="txt">中2</td>
+            <td data-label="スコア"class="score">225~550</td>
+        </tr>
+        <tr>
+            <th>B1</th>
+            <td data-label="学年" class="txt">中3~高1</td>
+            <td data-label="スコア"class="score">550~780</td>
+        </tr>
+        <tr>
+            <th>B2</th>
+            <td data-label="学年" class="txt">高2~</td>
+            <td data-label="スコア" class="score">780~</td>
+        </tr>
+    </tbody>
+</table>  
+
+
+
+<footer>
+    <small>あなたの単語学習の手助けに</small>
+</footer>
+
+</body>
+</html>
+
+<script>
+    function showPopup(index) {
+      const popupRow = document.getElementById("popup-" + index);
+      popupRow.style.display = (popupRow.style.display === "none") ? "table-row" : "none";
+    }
+  </script>
+  

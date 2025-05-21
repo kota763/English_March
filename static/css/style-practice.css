@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css?family=M+PLUS+1p');
+
+header{
+    display: flex;
+    height: 60px;
+    background-color: #02A08F;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 60px;
+    font-family: 'M PLUS 1p', sans-serif;
+    color: #FFFFFF;
+    text-align: center;
+  }
+
+.header-left {
+    font-size: 24px;
+  }
+
+.header-right .logo {
+    height: 40px;
+  }
+
+body {
+    font-family: "Open Sans", sans-serif;
+    line-height: 1.25;
+  }
+
+.container {
+    width: 75%;
+    margin: 0 auto; /* 中央揃え */
+    text-align: center;
+}
+
+.text-box {
+  width: 75%;          /* 幅70% */
+  margin: 2em auto;    /* 上下に余白、左右中央寄せ */
+  text-align: left;    /* テキストは左揃え */
+  padding: 1em 1.5em;  /* 内側に余白 */
+  border: 1px solid #ccc; /* 任意で枠線 */
+  border-radius: 8px;  /* 任意で角丸 */
+  background-color: #f9f9f9; /* 任意で背景色 */
+  font-size: 1.2em;    /* 文字を読みやすく */
+  line-height: 1.5;    /* 行間 */
+  word-wrap: break-word; /* 長い英文の折返し */
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5em;
+  margin: 1.5em 0;
+  justify-items: center;
+}
+
+.option-item {
+  font-size: 1.5em;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  cursor: pointer;
+}
+
+.round-button {
+  background-color: #02A08F;
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-family: 'M PLUS 1p', sans-serif;
+  border-radius: 50px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.round-button:hover {
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+}
+
+.round-button:active {
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  transform: translateY(1px);
+}
+
+footer{
+    height: 50px;
+    background-color: #02A08F;
+    justify-content: center;
+    align-items: center;
+    font-family: 'M PLUS 1p', sans-serif;
+    color: #FFFFFF;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 600px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: 10px;
+    }
+
+    .header-left {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+
+    .site-info-wrapper {
+        margin: 8px 0;
+    }
+
+    .header-right {
+        width: 100%;
+        text-align: center;
+        margin-top: 8px;
+    }
+
+    .header-right .logo {
+        height: auto;
+        max-width: 80%;
+    }
+
+    footer {
+        height: auto;
+        padding: 10px;
+        font-size: 14px;
+    }
+}
