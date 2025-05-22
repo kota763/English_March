@@ -122,30 +122,38 @@ CSV_MAP = {
 
 
 # 文章生成
-def generate_text(prompt, max_new_tokens=100, temperature=0.7):
-    """
-    テキスト生成の関数
-    prompt: 入力テキスト（開始文）
-    max_length: 生成するテキストの最大長さ
-    temperature: 生成するテキストの創造性（高いほどランダム性が増す）
-    """
-    # 入力テキストをトークン化
-    inputs = tokenizer.encode(prompt, return_tensors="pt")
-    # モデルでテキスト生成
-    outputs = model.generate(
-        inputs,
-        max_new_tokens=max_new_tokens,
-        temperature=temperature,
-        num_return_sequences=1,  # 生成するテキストの数
-        no_repeat_ngram_size=2,  # 重複するフレーズを避ける
-        top_p=0.95,  # 上位p%の確率で生成する
-        top_k=50,  # トップk個の候補からサンプリング
-        do_sample=True,  # サンプリングを使用
-    )
-    # 出力をデコードしてテキストに変換
-    generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    return generated_text
+# 外部API化のためコメントアウト
+# def generate_text(prompt, max_new_tokens=100, temperature=0.7):
+#     """
+#     テキスト生成の関数
+#     prompt: 入力テキスト（開始文）
+#     max_length: 生成するテキストの最大長さ
+#     temperature: 生成するテキストの創造性（高いほどランダム性が増す）
+#     """
+#     # 入力テキストをトークン化
+#     inputs = tokenizer.encode(prompt, return_tensors="pt")
+#     # モデルでテキスト生成
+#     outputs = model.generate(
+#         inputs,
+#         max_new_tokens=max_new_tokens,
+#         temperature=temperature,
+#         num_return_sequences=1,  # 生成するテキストの数
+#         no_repeat_ngram_size=2,  # 重複するフレーズを避ける
+#         top_p=0.95,  # 上位p%の確率で生成する
+#         top_k=50,  # トップk個の候補からサンプリング
+#         do_sample=True,  # サンプリングを使用
+#     )
+#     # 出力をデコードしてテキストに変換
+#     generated_text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+#     return generated_text
 
+def generate_text(prompt):
+    response = requests.post(
+        "https://ughu-gpt2-generator.hf.space/generate",  # ← 自分のURLに変更
+        json={"prompt": prompt},
+        timeout=10
+    )
+    return response.json()["text"]
 
 # ダミー作成
 # 品詞を揃えてダミーを作成する
