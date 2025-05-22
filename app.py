@@ -236,14 +236,31 @@ CSV_MAP = {
     "B2": "./static/csv/modified_B2.csv",
 }
 
-### 外部APIを使った文章生成関数
+# ### 外部APIを使った文章生成関数
+# def generate_text(prompt):
+#     response = requests.post(
+#         "https://ughu-gpt2-generator.hf.space/generate",
+#         json={"prompt": prompt},
+#         timeout=10
+#     )
+#     return response.json()["text"]
+# 一時的な修正
 def generate_text(prompt):
-    response = requests.post(
-        "https://ughu-gpt2-generator.hf.space/generate",
-        json={"prompt": prompt},
-        timeout=10
-    )
-    return response.json()["text"]
+    try:
+        response = requests.post(
+            "https://ughu-gpt2-generator.hf.space/generate",
+            json={"prompt": prompt},
+            timeout=10
+        )
+        print("API ステータス:", response.status_code)
+        print("API レスポンス:", response.text)
+
+        result = response.json()
+        return result["text"]
+    except Exception as e:
+        print("API呼び出しエラー:", e)
+        return "【APIエラー】"
+
 
 # ダミー作成
 # 品詞を揃えてダミーを作成する
