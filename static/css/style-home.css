@@ -128,6 +128,7 @@ body {
     padding: 0;
     width: 80%;
     table-layout: fixed;
+    margin-bottom: .5em;
   }
   
   table tr {
@@ -153,14 +154,34 @@ body {
   }
   .txt{
      text-align: left;
-     font-size: .85em;
+     font-size: 1em;
+  }
+
+  .mag{
+    text-align: center;
+    font-size: 1em;
   }
 
   .col{
     text-align: center;
+    font-weight: normal;
+  }
+
+  .word{
+    text-align: center;
     font-weight: bold;
   }
 
+  .grade{
+    text-align: center;
+    font-weight: normal;
+  }
+
+  .score{
+    text-align: center;
+    font-weight: normal;
+  }
+  
   footer{
     height: 50px;
     background-color: #02A08F;

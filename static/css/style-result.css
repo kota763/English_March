@@ -60,27 +60,71 @@ word-wrap: break-word; /* 長い英文の折返し */
 .speech-bubble::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 30px;
+  bottom: -30px; /* 吹き出し口が下に出るように */
+  left: 50%;
+  transform: translateX(-50%); /* 中央に配置 */
   width: 0;
   height: 0;
-  border: 20px solid transparent;
+  border: 12px solid transparent;
   border-top-color: #3DBA97;
-  border-bottom: 0;
-  margin-left: -20px;
-  margin-bottom: -20px;
 }
 
 .correct-and-save {
-  display: flex;
-  margin: 0 auto; /* 中央揃え */
-  align-items: center;
-  gap: 1em;
-  margin-bottom: 1em;
+  text-align: center;
+  margin-top: 1em;
+  margin-bottom: 2em;
+}
+.correct-line {
+  font-size: 1.2em;
+  margin-bottom: 0.3em;
+}
+.correct-word {
+  color: #02A08F;
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+.save-button {
+  padding: 0.4em 1em;
+  border: 1px solid #02A08F;
+  background-color: white;
+  color: #02A08F;
+  border-radius: 10px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.save-button:hover {
+  background-color: #02A08F;
+  color: white;
+  transform: scale(0.98);
 }
 
-.correct-and-save form {
-  margin: 0;
+.user-answer {
+  font-size: 1.5em;
+  margin: 1.5em 0;
+}
+
+.option-word {
+  font-size: 1.2em;
+  margin-bottom: 2em;
+}
+
+.option-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1em;
+}
+
+.option-cell {
+  flex: 0 1 40%;
+  font-size: 1.3em;
+  padding: 0.5em 1em;
+  background-color: #f1f1f1;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
 }
 
 #DeepL-options{
@@ -94,21 +138,49 @@ word-wrap: break-word; /* 長い英文の折返し */
   align-items: center;
 }
 
-.button-row form,
-.button-row .home-button {
-  margin: 0;
+/* ボタンデザイン */
+.retry-button {
+  padding: 0.6em 1.2em;
+  border: 2px solid #02A08F;
+  background-color: white;
+  color: #02A08F;
+  border-radius: 10px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.retry-button:hover {
+  background-color: #02A08F;
+  color: white;
+  transform: translateY(2px);
 }
 
 .home-button {
   display: inline-block;
-  padding: 0.5em 1em;
-  background-color: #ccc;
+  padding: 0.6em 1.2em;
+  border: 2px solid #aaa;
+  background-color: white;
+  color: #666;
+  border-radius: 10px;
+  font-size: 1em;
+  cursor: pointer;
   text-decoration: none;
-  border-radius: 4px;
-  color: black;
+  transition: all 0.2s ease;
 }
 .home-button:hover {
-  background-color: #bbb;
+  background-color: #aaa;
+  color: white;
+  transform: translateY(2px);
+}
+
+/* footerとの間隔拡張 */
+.button-row {
+  display: flex;
+  gap: 1em;
+  margin-top: 3em;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4em; /* footerとの間隔を追加 */
 }
 
 footer{

@@ -534,12 +534,22 @@ def highlight_word(text, base_form):
 @app.route("/")
 def home():
     if current_user.is_authenticated:
+        today = datetime.today().date()
+        special_dates = {
+            (today - timedelta(days=1)).strftime("%Y-%m-%d"),
+            (today - timedelta(days=3)).strftime("%Y-%m-%d"),
+            (today - timedelta(days=7)).strftime("%Y-%m-%d"),
+            (today - timedelta(days=28)).strftime("%Y-%m-%d"),
+        }
         words = SavedWord.query.filter_by(user_id=current_user.id).order_by(
             SavedWord.save_date.desc()
         )
         correct_counter = Users.query.filter_by(id=current_user.id).first()
         return render_template(
-            "home.html", words=words, correct_counter=correct_counter
+            "home.html",
+            words=words,
+            correct_counter=correct_counter,
+            special_dates=special_dates,
         )
     return render_template("home.html")
 

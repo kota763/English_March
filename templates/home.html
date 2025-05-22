@@ -19,8 +19,8 @@
     </div>
     {% if current_user.is_authenticated %}
     <div class="correct_counter">
-        <p>正解カウンター</p>
-        <p><span style="font-size: larger;">{{ correct_counter.correct_answers }}</span>問</p>
+        <p>正解カウンター<br>
+        <span style="font-size: xx-large;">{{ correct_counter.correct_answers }}</span>問</p>
     </div>
     {% endif %}
     <div class="header-right">
@@ -67,10 +67,16 @@
         <td class="col">
           <button class="popup-toggle-btn" onclick="showPopup({{ loop.index0 }})">▼</button>
         </td>
-        <td class="col">{{ w.save_date }}</td>
+        <td class="col">
+            {% if w.save_date in special_dates %}
+                <span style="color: #E6B422; font-weight: bold;">{{ w.save_date }}</span>
+            {% else %}
+                {{ w.save_date }}
+            {% endif %}
+        </td>
         <td class="col">{{ w.level }}</td>
-        <td class="txt">{{ w.word }}</td>
-        <td class="txt"> <a id="DeepL-word" href="https://www.deepl.com/ja/translator#en/ja/{{ w.word | urlencode }}" target="_blank">🔍</a></td>
+        <td class="word">{{ w.word }}</td>
+        <td class="mag"> <a id="DeepL-word" href="https://www.deepl.com/ja/translator#en/ja/{{ w.word | urlencode }}" target="_blank">🔍</a></td>
       </tr>
       <tr id="popup-{{ loop.index0 }}" class="popup-row" style="display: none; background-color: #fef9e7;">
         <!--
@@ -87,6 +93,7 @@
 </table>
 
 <p>「これ何だっけ🤔」という単語は🔍のマークを押して意味を確認しよう!</p>
+<p> 1日前, 3日前, 1週間前, 1ヶ月前(<span style="color: #D6A422;">金色の日付</span>)に保存した単語を復習すると効率up!!☝️</p>
 
 {% else %}
 
@@ -107,22 +114,22 @@
     <tbody>
         <tr>
             <th>A1</th>
-            <td data-label="学年" class="txt">中1</td>
+            <td data-label="学年" class="grade">中1</td>
             <td data-label="スコア" class="score">0~225</td>
         </tr>
         <tr>
             <th>A2</th>
-            <td data-label="学年" class="txt">中2</td>
+            <td data-label="学年" class="grade">中2</td>
             <td data-label="スコア"class="score">225~550</td>
         </tr>
         <tr>
             <th>B1</th>
-            <td data-label="学年" class="txt">中3~高1</td>
+            <td data-label="学年" class="grade">中3~高1</td>
             <td data-label="スコア"class="score">550~780</td>
         </tr>
         <tr>
             <th>B2</th>
-            <td data-label="学年" class="txt">高2~</td>
+            <td data-label="学年" class="grade">高2~</td>
             <td data-label="スコア" class="score">780~</td>
         </tr>
     </tbody>
