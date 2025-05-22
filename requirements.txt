@@ -6,6 +6,7 @@ torch==2.6.0+cpu
 transformers==4.40.2
 pandas==2.2.2
 spacy==3.7.4
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl
 nltk==3.9.1
 word-forms==2.1.0
 Werkzeug==3.0.1      # werkzeug.security 用
