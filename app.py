@@ -572,7 +572,8 @@ def practice():
 
     ### ここからは、文章を生成するパート
     generated_text = ""
-    generated_text = generate_text(first_sentence, max_new_tokens=100, temperature=0.7)
+    # generated_text = generate_text(first_sentence, max_new_tokens=100, temperature=0.7)
+    generated_text = generate_text(first_sentence)
     ### ここまでで、文章を生成できた
 
     ### ここからは、文章をチェックするパート
