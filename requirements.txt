@@ -27,7 +27,7 @@ DateTime==5.5
 psycopg2-binary
 requests  # 外部API呼び出しに必要
 # FastAPI対応のため追加
-fastapi
-uvicorn
-transformers
-torch
+# fastapi
+# uvicorn
+# transformers
+# torch
